@@ -2,16 +2,14 @@ package com.example.springdemo.pojo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 
 public class Banner {
+    private static final Logger logger = LoggerFactory.getLogger("Banner");
     private Icon icon;
     private Navigation navigation;
-    private static Logger logger = LoggerFactory.getLogger("Banner");
-
 
 
     public Banner() {
@@ -23,7 +21,8 @@ public class Banner {
         this.icon = banner.icon;
         this.navigation = banner.navigation;
     }
-   public Banner(Icon icon, Navigation navigation) {
+
+    public Banner(Icon icon, Navigation navigation) {
         this.icon = icon;
         this.navigation = navigation;
     }
@@ -41,40 +40,44 @@ public class Banner {
         String nav_url = sqlRowSet.getString("nav_url");
         Integer nav_type = sqlRowSet.getInt("nav_type");
         String appid = sqlRowSet.getString("appid");
-        this.navigation = new Navigation(nav_type,nav_url,appid);
+        this.navigation = new Navigation(nav_type, nav_url, appid);
     }
 
     public Icon getIcon() {
         return icon;
     }
+
     public void setIcon(Icon icon) {
         this.icon = icon;
     }
+
     public Navigation getNavigation() {
         return navigation;
     }
+
     public void setNavigation(Navigation navigation) {
         this.navigation = navigation;
     }
 }
 
-class Icon{
+class Icon {
     public String url;
     public Integer width;
     public Integer height;
 
-    public Icon(){
-            url = null;
-            width = 0;
-            height = 0;
-    };
+    public Icon() {
+        url = null;
+        width = 0;
+        height = 0;
+    }
 
-    public Icon(String url, Integer width, Integer height){
+    public Icon(String url, Integer width, Integer height) {
         this.url = url;
         this.width = width;
         this.height = height;
     }
-    public Icon(Icon icon){
+
+    public Icon(Icon icon) {
         this.url = icon.url;
         this.width = icon.width;
         this.height = icon.height;
@@ -82,44 +85,45 @@ class Icon{
 
 }
 
-class Navigation{
+class Navigation {
     public Integer type;
     public String url;
     public String appid;
 
-    public Navigation(){
-    type = 0;
-    url = null;
-    appid = null;
+    public Navigation() {
+        type = 0;
+        url = null;
+        appid = null;
     }
-    public Navigation(Integer type, String url, String appid){
+
+    public Navigation(Integer type, String url, String appid) {
         this.type = type;
         this.url = url;
         this.appid = appid;
     }
 
-    public Navigation(Integer type, String link){
+    public Navigation(Integer type, String link) {
         this.type = type;
-        switch(type)
-        {
-            case 1:{
+        switch (type) {
+            case 1: {
                 this.appid = link;
                 this.url = null;
                 break;
             }
-            case 3:{
+            case 3: {
                 this.appid = null;
                 this.url = link;
                 break;
             }
-            default:{
+            default: {
                 this.url = null;
                 this.appid = null;
                 break;
             }
         }
     }
-    public Navigation(Navigation navigation){
+
+    public Navigation(Navigation navigation) {
         this.type = navigation.type;
         this.url = navigation.url;
         this.appid = navigation.appid;

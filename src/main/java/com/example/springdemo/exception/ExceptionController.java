@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @author cj
- * 异常捕获，遵循restful风格
+ * 异常捕获，遵循RESTful风格
  */
 @RestControllerAdvice
 public class ExceptionController {
-    private Logger logger = LoggerFactory.getLogger(ExceptionController.class);
+    private final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
+
     /**
      * 捕捉异常
      */
@@ -23,7 +24,7 @@ public class ExceptionController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public JSONResult globalException(HttpServletRequest request, Throwable ex) {
         logger.error("异常：", ex);
-        return JSONResult.error(getStatus(request).value(),ex.getMessage());
+        return JSONResult.error(getStatus(request).value(), ex.getMessage());
     }
 
     private HttpStatus getStatus(HttpServletRequest request) {

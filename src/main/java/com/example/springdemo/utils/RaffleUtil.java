@@ -1,12 +1,10 @@
 package com.example.springdemo.utils;
 
 import com.example.springdemo.pojo.Reward;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,20 +19,21 @@ import java.util.List;
 @Component
 public class RaffleUtil {
 
-    private static List<Reward> rewards = Collections.synchronizedList(new ArrayList<>());
+    private static final List<Reward> rewards = Collections.synchronizedList(new ArrayList<>());
 
-    public  void InitialCache(JdbcTemplate jdbcTemplate) {
-        if(rewards.isEmpty()) {
-                SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet("select * from rewards");
-        while(sqlRowSet.next()){
-            rewards.add(Reward.Reward(sqlRowSet));
+    public void InitialCache(JdbcTemplate jdbcTemplate) {
+        if (rewards.isEmpty()) {
+            SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet("select * from rewards");
+            while (sqlRowSet.next()) {
+                rewards.add(Reward.Reward(sqlRowSet));
+            }
+
         }
-
-    }
     }
 
     /**
      * 抽奖算法
+     *
      * @param
      * @return 物品的索引
      */
@@ -50,7 +49,7 @@ public class RaffleUtil {
         Integer tempSumRate = 0;
         for (Reward item : rewards) {
             tempSumRate += item.getPercentage();
-            sortOriginRates.add((double)tempSumRate / (double)sumRate);
+            sortOriginRates.add((double) tempSumRate / (double) sumRate);
         }
         // 根据区块值来获取抽取到的物品索引
         Double nextDouble = Math.random();
