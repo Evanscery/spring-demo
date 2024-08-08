@@ -25,7 +25,7 @@
 ```
 
 ```
-端口开放于：http://localhost:8080
+本地调试端口开放于：http://localhost:8080
 使用数据源： MySql
 ```
 
