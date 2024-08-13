@@ -1,4 +1,6 @@
+
 # RESTful APIs
+## [中文](README_CHS.md)
   This project is a prototype code that strips business data from an actual project.
 
   The main content is a backend interface package based on the spring-boot and RESTful standards.
