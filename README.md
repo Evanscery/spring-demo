@@ -18,7 +18,7 @@ Parameter non-null validation |Interface security
 High concurrency handling|Table design and batch task logic
 
 Example of a response data packet
-```javascript
+```json
 {
 	"status": 200,
 	"msg": "OK",
@@ -91,7 +91,7 @@ including icon, name, and winning probability.
 
 ##### Success 200
 
-```javascript
+```json
 {
 	"status": 27,
 	"msg": "ok",
@@ -116,7 +116,7 @@ including icon, name, and winning probability.
 
 ##### Failure 404
 
-```javascript
+```json
 {
 	"status": "404",
 	"msg": "Resource not found",
